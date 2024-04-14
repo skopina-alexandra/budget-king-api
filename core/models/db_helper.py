@@ -32,5 +32,5 @@ class DatabaseHelper:
 
 
 db_helper = DatabaseHelper(
-    url=f"postgresql+asyncpg://{settings.main_db_user}:{settings.main_db_password}@{settings.main_db_host}/{settings.main_db_name}"
+    url=settings.main_db_url,
 )
