@@ -5,7 +5,6 @@ from pydantic import BaseModel, ConfigDict
 
 class UserBase(BaseModel):
     name: str
-    # created_at: datetime
 
 
 class UserCreate(UserBase):
