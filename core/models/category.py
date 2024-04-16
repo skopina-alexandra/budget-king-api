@@ -1,7 +1,11 @@
 from .base import Base
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Literal, get_args
 from sqlalchemy import Enum, ForeignKey
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .user import User
 
 CategoryType = Literal["income", "outcome"]
 
@@ -18,3 +22,4 @@ class Category(Base):
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id"),
     )
+    user: Mapped["User"] = relationship(back_populates="categories")
