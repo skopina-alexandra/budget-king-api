@@ -12,4 +12,7 @@ async def create_user(
     user_create: UserCreate,
     session: AsyncSession = Depends(db_helper.session_dependency),
 ):
-    return await crud.create_user(session=session, user_create=user_create)
+    return await crud.create_user(
+        session=session,
+        user_create=user_create,
+    )
