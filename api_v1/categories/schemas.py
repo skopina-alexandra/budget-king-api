@@ -17,5 +17,7 @@ class CategoryCreate(CategoryBase):
     pass
 
 
-class CategoryEditPartial(CategoryBase):
-    pass
+class CategoryUpdate(CategoryCreate):
+    name: str | None = None
+    type: CategoryType | None = None
+    user_id: int | None = None
