@@ -48,3 +48,14 @@ async def update_category(
         category=category,
         category_update=category_update,
     )
+
+
+@router.delete("/{category_id}")
+async def delete_category(
+    category: Category = Depends(category_by_id),
+    session=Depends(db_helper.session_dependency),
+):
+    return await crud.delete_category(
+        session=session,
+        category=category,
+    )
