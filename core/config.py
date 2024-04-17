@@ -1,18 +1,24 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class DbSettings(BaseSettings):
+    main_db_user: str
+    main_db_password: str
+    main_db_host: str
+    main_db_name: str
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+    )
 
 
 class Settings(BaseSettings):
-    main_db_user: str = "postgres"
-    main_db_password: str = "p0stgresql!"
-    main_db_host: str = "localhost"
-    main_db_name: str = "budget-king"
-    main_db_url: str = (
-        f"postgresql+asyncpg://{main_db_user}:{main_db_password}@{main_db_host}/{main_db_name}"
+    db: DbSettings = DbSettings(
+        _env_file=".env",
     )
-
+    main_db_url: str = (
+        f"postgresql+asyncpg://{db.main_db_user}:{db.main_db_password}@{db.main_db_host}/{db.main_db_name}"
+    )
     api_v1_prefix: str = "/api/v1"
 
 
