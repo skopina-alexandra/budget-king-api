@@ -9,7 +9,7 @@ Create Date: 2024-04-18 14:23:56.230770
 from typing import Sequence, Union
 
 from alembic import op
-import sqlalchemy as sa
+from sqlalchemy.sql import text
 from sqlalchemy import orm
 
 from core.models import Interval
@@ -48,6 +48,6 @@ def downgrade() -> None:
     session = orm.Session(bind=bind)
     for interval in session.query(Interval):
         session.delete(interval)
-
     session.commit()
+    bind.execute(text("alter sequence intervals_id_seq restart with 1"))
     # ### end Alembic commands ###
