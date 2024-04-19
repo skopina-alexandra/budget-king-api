@@ -12,8 +12,6 @@ class Period(Base):
     start: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
     )
-    interval_id: Mapped[int] = (
-        mapped_column(
-            ForeignKey("intervals.id"),
-        ),
+    interval_id: Mapped[int] = mapped_column(
+        ForeignKey("intervals.id"),
     )
