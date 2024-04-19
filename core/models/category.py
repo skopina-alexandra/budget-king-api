@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .user import User
 
-CategoryType = Literal["income", "outcome"]
+CategoryType = Literal["income", "outcome", "savings"]
 
 
 class Category(Base):
