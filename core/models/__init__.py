@@ -8,6 +8,7 @@ __all__ = (
     "Interval",
     "Period",
     "Record",
+    "Planning",
 )
 
 from .base import Base
@@ -17,3 +18,4 @@ from .category import Category, CategoryType
 from .interval import Interval
 from .period import Period
 from .record import Record
+from .planning import Planning
