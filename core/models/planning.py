@@ -13,4 +13,4 @@ class Planning(Base):
     period_id: Mapped[int] = mapped_column(
         ForeignKey("periods.id"),
     )
-    amount: Mapped[int | None]
+    amount: Mapped[int]

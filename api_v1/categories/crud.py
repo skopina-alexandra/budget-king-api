@@ -3,6 +3,7 @@ from core.models import Category
 from .schemas import CategoryCreate, CategoryUpdate
 from sqlalchemy import select
 from sqlalchemy.engine import Result
+from core.utils import fill_model_attributes
 
 
 async def create_category(
@@ -37,8 +38,10 @@ async def update_category(
     category: Category,
     category_update: CategoryUpdate,
 ) -> Category:
-    for name, value in category_update.model_dump(exclude_unset=True).items():
-        setattr(category, name, value)
+    category = fill_model_attributes(
+        category,
+        category_update,
+    )
     await session.commit()
     return category
 

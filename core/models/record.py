@@ -1,6 +1,8 @@
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, TIMESTAMP
 from .base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from datetime import datetime
+from sqlalchemy.sql import func
 
 
 class Record(Base):
@@ -10,7 +12,8 @@ class Record(Base):
     category_id: Mapped[int] = mapped_column(
         ForeignKey("categories.id"),
     )
-    period_id: Mapped[int] = mapped_column(
-        ForeignKey("periods.id"),
+    amount: Mapped[int]
+    date: Mapped[datetime] = mapped_column(
+        TIMESTAMP(timezone=True),
+        server_default=func.now(),
     )
-    amount: Mapped[int | None]
